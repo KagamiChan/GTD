@@ -1,0 +1,120 @@
+\documentclass[cs4size,a4paper,openany,oneside,slantfont,CJKnumber,fancyhdr]{ctexbook}
+
+\usepackage[paper=a4paper,top=2.54cm,bottom=2.54cm,left=2.54cm,right=2.54cm,footskip=2em]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+%\usepackage{titletoc}
+\usepackage{setspace}
+\usepackage[perpage]{footmisc}
+\usepackage{indentfirst}
+\usepackage{anyfontsize}
+
+
+
+
+
+%Chinese
+
+\usepackage{fontspec}% provides font selecting commands
+\usepackage{xunicode}% provides unicode character macros
+\defaultfontfeatures{Mapping=tex-text}
+%\usepackage[slantfont,boldfont,CJKnumber]{xeCJK}
+%\setCJKmainfont{Hiragino Sans GB W3}
+%\setCJKsansfont{Hiragino Sans GB W3}
+%\setCJKmonofont{Hiragino Sans GB W3}
+\setCJKmainfont[BoldFont={Hiragino Sans GB W6}]{Hiragino Sans GB W3}
+\setCJKsansfont[BoldFont={Hiragino Sans GB W6}]{Hiragino Sans GB W3}
+\setCJKmonofont[BoldFont={Hiragino Sans GB W6}]{Hiragino Sans GB W3}
+
+%\fontspec[BoldFont={Open Sans}]{Open Sans Light}
+\setmainfont[BoldFont={Open Sans Semibold}]{Open Sans}
+\setsansfont[BoldFont={Open Sans Semibold}]{Open Sans}
+\setmonofont[BoldFont={Open Sans Semibold}]{Open Sans}
+\renewcommand{\familydefault}{\sfdefault}
+
+
+\interfootnotelinepenalty=10000
+
+%Customized Title
+\titleclass{\part}{top}
+\titleformat{\part}[display]{\bfseries\zihao{0}\centering}{第{\CJKnumber{\thechapter}}部分}{2ex}{}
+\titleformat{\chapter}[display]{\bfseries\LARGE\flushright}{第{\CJKnumber{\thechapter}}章}{2ex}{}
+\titleformat{\section}{\bfseries\Large\flushright}{}{0ex}{}
+\titleformat{\subsection}{\Large\flushright}{}{0ex}{}
+
+\renewcommand{\normalsize}{\zihao{4}}
+\renewcommand{\large}{\zihao{-2}}
+\renewcommand{\Large}{\zihao{-2}}
+\renewcommand{\LARGE}{\zihao{1}}
+\renewcommand{\footnotesize}{\zihao{5}}
+
+
+%customized contents / toc
+%\titlecontents*{section}[1.5em]{}{}{}{}
+\setcounter{tocdepth}{0}
+
+%BOOK PARA
+\usepackage{url}
+\usepackage[CJKbookmarks=true,xetex,unicode]{hyperref}
+\usepackage{bookmark}
+\hypersetup{
+    unicode=true,            % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,         % show Acrobat’s toolbar?
+    pdfmenubar=true,         % show Acrobat’s menu?
+    pdffitwindow=true,      % page fit to window when opened
+    pdftitle={搞定:无压工作的艺术},      % title
+    pdfauthor={戴维•艾伦},        % author
+    pdfsubject={管理学},    % subject of the document
+    pdfnewwindow=true,       % links in new window
+    pdfkeywords={}, % list of keywords
+    colorlinks=true ,        % false: boxed links; true: colored links
+    linkcolor=black,         % color of internal links
+    citecolor=black,         % color of links to bibliography
+    filecolor=black,         % color of file links
+    urlcolor=black           % color of external links
+    pdfstartview ={XYZ null null 1.00}
+    bookmarksnumbered={true}
+}
+
+
+
+
+
+\newcommand*{\titleTH}{\begingroup% T&H Typography
+\raggedleft
+
+{\fontsize{54}{54} \sc Getting Things Done}\\
+{The Art of Stress-Free Productivity}\\
+[\baselineskip]
+{\Huge 搞定:无压工作的艺术}\\
+\par
+\vfill
+\vspace*{\baselineskip}
+
+{\Large  [英]戴维·艾伦 David Allen~著 \\张静~译}\\[\baselineskip]
+
+{ 编译时间：\today{}}\par
+\endgroup}
+
+%PAGESTYLE
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO,LE]{\leftmark}
+\fancyhead[LO,RE]{\thepage}
+\fancyfoot{}
+
+%BEGIN OF THE BOOK
+\begin{document}
+\thispagestyle{empty}
+\titleTH
+\frontmatter
+\thispagestyle{empty}
+\pdfbookmark{\contentsname}{toc}
+\tableofcontents
+
+\setlength{\baselineskip}{0.95\baselineskip}
+
+
+\mainmatter
+
+\end{document}
