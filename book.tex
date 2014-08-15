@@ -1,3 +1,5 @@
+% Project Name: Nozomi
+
 \documentclass[cs4size,a4paper,openany,oneside,slantfont,CJKnumber,fancyhdr]{ctexbook}
 
 \usepackage[paper=a4paper,top=2.54cm,bottom=2.54cm,left=2.54cm,right=2.54cm,footskip=2em]{geometry}
@@ -8,63 +10,33 @@
 \usepackage[perpage]{footmisc}
 \usepackage{indentfirst}
 \usepackage{anyfontsize}
+\usepackage{xcolor}
+
+\usepackage{framed}
+\definecolor{deepgrey}{HTML}{333333}
+\definecolor{nblue}{HTML}{00AEEF}
+
 
 \RequirePackage{CJKnumb} 
+\RequirePackage{etoolbox} 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%quotation style from http://tex.stackexchange.com/questions/16964/block-quote-with-big-quotation-marks, with my customization
+%%quotation style from http://tex.stackexchange.com/questions/13756/quote-environment-with-reference-at-the-end-right
 
-\usepackage{etoolbox}
-\usepackage[svgnames]{xcolor}
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+  \hbox{}\nobreak\hfil ——~#1%
+  \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
 
-\usepackage{tikz}
-\usepackage{framed}
-
-
-
-\newfontfamily\quotefont{Source Han Sans CN Light} % selects Libertine as the quote font
-
-
-\newcommand*\quotesize{60} % if quote size changes, need a way to make shifts relative
-% Make commands for the quotes
-\newcommand*{\openquote}
-   {\tikz[remember picture,overlay,xshift=-4ex,yshift=-2.5ex]
-   \node (OQ) {\quotefont\fontsize{\quotesize}{\quotesize}\selectfont``};\kern0pt}
-
-\newcommand*{\closequote}[1]
-  {\tikz[remember picture,overlay,xshift=4ex,yshift={#1}]
-   \node (CQ) {\quotefont\fontsize{\quotesize}{\quotesize}\selectfont''};\kern0pt}
-
-% select a colour for the shading
-\colorlet{shadecolor}{Azure}
-
-\newcommand*\shadedauthorformat{} % define format for the author argument
-
-% Now a command to allow left, right and centre alignment of the author
-\newcommand*\authoralign[1]{%
-  \if#1l
-    \def\authorfill{}\def\quotefill{\hfill}
-  \else
-    \if#1r
-      \def\authorfill{\hfill}\def\quotefill{}
-    \else
-      \if#1c
-        \gdef\authorfill{\hfill}\def\quotefill{\hfill}
-      \else\typeout{Invalid option}
-      \fi
-    \fi
-  \fi}
-% wrap everything in its own environment which takes one argument (author) and one optional argument
-% specifying the alignment [l, r or c]
-%
-\newenvironment{nquote}[2][r]%
-{\authoralign{#1}
-\ifblank{#2}
-   {\def\shadequoteauthor{}\def\yshift{-2ex}\def\quotefill{\hfill}}
-   {\def\shadequoteauthor{\par\authorfill\shadedauthorformat{——~#2}}\def\yshift{}}
-\begin{quote}\itshape}
-{\shadequoteauthor\quotefill{\yshift}\end{quote}}
+\newsavebox\mybox
+\newenvironment{nquote}[1]%
+  {
+  \ifblank{#1}
+  {\def\nbegin{\begin{quote}}\def\nend{\end{quote}}}
+  {\def\nbegin{\savebox\mybox{#1}\begin{quote}\itshape}
+  \def\nend{\signed{\usebox\mybox}\end{quote}}}
+  \nbegin}
+  {\nend}
 
 
 %end of quotation style
@@ -79,14 +51,14 @@
 %\setCJKmainfont{Hiragino Sans GB W3}
 %\setCJKsansfont{Hiragino Sans GB W3}
 %\setCJKmonofont{Hiragino Sans GB W3}
-\setCJKmainfont[BoldFont={Source Han Sans CN Medium},AutoFakeSlant=0.15 ]{Source Han Sans CN}
-\setCJKsansfont[BoldFont={Source Han Sans CN Medium},AutoFakeSlant=0.15 ]{Source Han Sans CN}
-\setCJKmonofont[BoldFont={Source Han Sans CN Medium},AutoFakeSlant=0.15 ]{Source Han Sans CN}
+\setCJKmainfont[AutoFakeSlant=0.15 ]{Source Han Sans CN}
+\setCJKsansfont[AutoFakeSlant=0.15 ]{Source Han Sans CN}
+\setCJKmonofont[AutoFakeSlant=0.15 ]{Source Han Sans CN}
 
 %\fontspec[BoldFont={Open Sans}]{Open Sans Light}
-\setmainfont[BoldFont={Open Sans Semibold}]{Open Sans}
-\setsansfont[BoldFont={Open Sans Semibold}]{Open Sans}
-\setmonofont[BoldFont={Open Sans Semibold}]{Open Sans}
+\setmainfont{Open Sans}
+\setsansfont{Open Sans}
+\setmonofont{Open Sans}
 \renewcommand{\familydefault}{\sfdefault}
 
 
@@ -96,9 +68,9 @@
 %Customized Title
 \titleclass{\part}{top}
 \titleformat{\part}[display]{\bfseries\zihao{0}\centering}{第\CJKnumber{ \arabic{part}}部分}{2ex}{}
-\titleformat{\chapter}[display]{\bfseries\LARGE\flushright}{第{\CJKnumber{\thechapter}}章}{2ex}{}
-\titleformat{\section}{\bfseries\Large\flushright}{}{0ex}{}
-\titleformat{\subsection}{\Large\flushright}{}{0ex}{}
+\titleformat{\chapter}[display]{\bfseries \zihao{1}\flushright}{第{\CJKnumber{\thechapter}}章}{2ex}{}
+\titleformat{\section}{\color{nblue}\zihao{2}\flushright}{}{0ex}{}
+\titleformat{\subsection}{\bfseries\zihao{3}\flushright}{}{0ex}{}
 
 \renewcommand{\normalsize}{\zihao{4}}
 \renewcommand{\large}{\zihao{-2}}
@@ -136,7 +108,7 @@
 
 
 
-\definecolor{deepgrey}{HTML}{333333}
+
 
 \newcommand*{\titleTH}{\begingroup% T&H Typography
 \raggedleft
